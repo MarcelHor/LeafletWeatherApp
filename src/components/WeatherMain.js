@@ -80,7 +80,7 @@ export const WeatherMain = () => {
                 <MapContainer
                     center={[49.832118, 15.332090]}
                     zoom={8}
-                    style={{ width: '75vw', height: '100vh' }}
+                    style={{ width: '70vw', height: '100vh' }}
                     ref={mapRef}
                 >
                     <TileLayer
