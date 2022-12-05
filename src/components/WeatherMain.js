@@ -57,7 +57,7 @@ export const WeatherMain = () => {
     }
 
     return (
-        <div className={"md:flex"}>
+        <div className={"md:flex overflow-y-scroll"}>
             <div className="bg-gradient-to-b from-indigo-800 via-indigo-500 to-violet-400 md:w-1/3 text-white text-center p-8">
                     <form onSubmit={getWeather} className={"flex justify-center items-center space-x-4"}>
                         <img src={searchIcon} alt="search icon" className="w-8 h-8 mx-auto"/>
@@ -67,7 +67,6 @@ export const WeatherMain = () => {
                             value={city}
                             onChange={(e) => setCity(e.target.value)}
                             className={"text-black h-8 rounded-md outline-none"}
-
                         />
                         <button type="submit" className={"block uppercase mx-auto shadow bg-white bg-opacity-10 hover:bg-opacity-30 focus:shadow-outline focus:outline-none text-white text- py-3 px-8 rounded"}>Search</button>
                     </form>
