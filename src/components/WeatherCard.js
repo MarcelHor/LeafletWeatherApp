@@ -4,7 +4,8 @@ export const WeatherCard = ({weather}) => {
 
     return (
         <div className={"mt-16 bg-white bg-opacity-10 pb-16 pt-4"}>
-            <div className={"text-center"}>
+            <div className={"flex justify-center items-center space-x-2"}>
+                <img src = {`http://openweathermap.org/img/w/${weather.list[0].weather[0].icon}.png`}/>
                 <h2 className="text-2xl">{weather.city.name}, {weather.city.country}</h2>
             </div>
             <div className={"grid grid-cols-2 gap-4 justify-items-center pt-8 "}>

@@ -29,7 +29,6 @@ export const WeatherMain = () => {
             setWeather(data);
             setError(null);
             flyTo(data.city.coord)
-            console.log(weather)
         }
     }
 
@@ -58,8 +57,8 @@ export const WeatherMain = () => {
     }
 
     return (
-        <div className={"flex"}>
-            <div className="bg-gradient-to-b from-indigo-800 via-indigo-500 to-violet-400 w-1/3 text-white text-center p-8">
+        <div className={"md:flex"}>
+            <div className="bg-gradient-to-b from-indigo-800 via-indigo-500 to-violet-400 md:w-1/3 text-white text-center p-8">
                     <form onSubmit={getWeather} className={"flex justify-center items-center space-x-4"}>
                         <img src={searchIcon} alt="search icon" className="w-8 h-8 mx-auto"/>
                         <input
@@ -74,13 +73,16 @@ export const WeatherMain = () => {
                     </form>
                 {error && <p>{error}</p>}
                 {weather && <WeatherCard weather={weather}/>}
+                <div className={""}>
+                    <p>Created by <a className={"underline"} href="https://github.com/MarcelHor">Marcel Horváth</a></p>
+                </div>
             </div>
 
-            <div >
+            <div className={"h-screen w-full"}>
                 <MapContainer
                     center={[49.832118, 15.332090]}
                     zoom={8}
-                    style={{ width: '70vw', height: '100vh' }}
+                    className={"h-screen w-full"}
                     ref={mapRef}
                 >
                     <TileLayer
