@@ -8,6 +8,7 @@ import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import "leaflet/dist/leaflet.css";
+import {Spinner} from "./Spinner";
 
 
 export const WeatherMain = () => {
@@ -18,17 +19,21 @@ export const WeatherMain = () => {
     const [weather, setWeather] = useState(null);
     const [city, setCity] = useState("Prague");
     const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     const getWeather = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         const response = await fetch(`${url}${apiKey}&q=${city}`);
         const data = await response.json();
-        if (data.cod === "404") {
+        if (!response.ok) {
             setError(data.message);
+            setIsLoading(false);
         } else {
             setWeather(data);
             setError(null);
             flyTo(data.city.coord)
+            setIsLoading(false);
         }
     }
 
@@ -36,15 +41,20 @@ export const WeatherMain = () => {
         const map = useMapEvents({
             click: async (e) => {
                 //change weather
+                setIsLoading(true);
                 const response = await fetch(`${url}${apiKey}&lat=${e.latlng.lat}&lon=${e.latlng.lng}`);
                 const data = await response.json();
-                if (data.cod === "404") {
+                if (!response.ok) {
                     setError(data.message);
-                } else {
+                    setIsLoading(false);
+                }
+                else {
                     setWeather(data);
                     setCity(data.city.name);
                     setError(null);
                     flyTo(data.city.coord)
+                    setIsLoading(false);
+
                 }
 
             }
@@ -71,7 +81,7 @@ export const WeatherMain = () => {
                         <button type="submit" className={"block uppercase mx-auto shadow bg-white bg-opacity-10 hover:bg-opacity-30 focus:shadow-outline focus:outline-none text-white text- py-3 px-8 rounded"}>Search</button>
                     </form>
                 {error && <p>{error}</p>}
-                {weather && <WeatherCard weather={weather}/>}
+                {isLoading ? <Spinner /> : weather && <WeatherCard weather={weather}/>}
                 <div className={""}>
                     <p>Created by <a className={"underline"} href="https://github.com/MarcelHor">Marcel Horváth</a></p>
                 </div>
@@ -81,7 +91,8 @@ export const WeatherMain = () => {
                 <MapContainer
                     center={[49.832118, 15.332090]}
                     zoom={8}
-                    className={"h-screen w-full"}
+                    scrollWheelZoom={true}
+                    className={"h-screen w-full z-0"}
                     ref={mapRef}
                 >
                     <TileLayer
@@ -89,15 +100,16 @@ export const WeatherMain = () => {
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
                     {weather && <Marker position={[weather.city.coord.lat, weather.city.coord.lon]}>
-                            <Popup>
-                                {weather.city.name}
-                            </Popup>
-                        </Marker>}
+                        <Popup>
+                            {weather.city.name}
+                        </Popup>
+                    </Marker>}
                     }
                     <GetWeatherMap />
                 </MapContainer>
-            </div>
 
+            </div>
+            <button onClick={() => window.scrollTo(0, 0)} className={"lg:hidden fixed bottom-4 right-4 bg-white rounded-full p-3 z-10"}> <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />  </svg></button>
         </div>
     )
 }
