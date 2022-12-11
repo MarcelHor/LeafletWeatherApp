@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/LeafletWeatherApp/static/css/main.e56e09ca.css",
-    "main.js": "/LeafletWeatherApp/static/js/main.2b5f5fd0.js",
+    "main.css": "/LeafletWeatherApp/static/css/main.8b6e041c.css",
+    "main.js": "/LeafletWeatherApp/static/js/main.a4a6c5c4.js",
     "index.html": "/LeafletWeatherApp/index.html",
     "static/media/search.svg": "/LeafletWeatherApp/static/media/search.2c7305c78319eea99681984ad63d982e.svg",
-    "main.e56e09ca.css.map": "/LeafletWeatherApp/static/css/main.e56e09ca.css.map",
-    "main.2b5f5fd0.js.map": "/LeafletWeatherApp/static/js/main.2b5f5fd0.js.map"
+    "main.8b6e041c.css.map": "/LeafletWeatherApp/static/css/main.8b6e041c.css.map",
+    "main.a4a6c5c4.js.map": "/LeafletWeatherApp/static/js/main.a4a6c5c4.js.map"
   },
   "entrypoints": [
-    "static/css/main.e56e09ca.css",
-    "static/js/main.2b5f5fd0.js"
+    "static/css/main.8b6e041c.css",
+    "static/js/main.a4a6c5c4.js"
   ]
 }
